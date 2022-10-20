@@ -26,3 +26,12 @@ jobs:
     - run: bundle exec ruby ext/tokenizers/extconf.rb && make && make install
     - run: bundle exec rake download:files
     - run: bundle exec rake test
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact
+        path: lib/
+
+    - name: Display structure of built gems
+      run: ls -R
+      working-directory: lib/
