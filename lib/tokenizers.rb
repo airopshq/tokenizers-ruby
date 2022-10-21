@@ -1,5 +1,9 @@
 # extlib
-require "tokenizers/ext"
+begin # Try loading extensions
+  require_relative "tokenizers/ext/#{RUBY_PLATFORM}/ext"
+rescue LoadError
+  require "tokenizers/ext"
+end
 
 # modules
 require "tokenizers/char_bpe_tokenizer"

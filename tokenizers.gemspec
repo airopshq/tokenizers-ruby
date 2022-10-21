@@ -1,5 +1,7 @@
 require_relative "lib/tokenizers/version"
 
+BUILT_PLATFORMS = ["arm64--darwin21", "x86_64-linux"]
+
 Gem::Specification.new do |spec|
   spec.name          = "tokenizers"
   spec.version       = Tokenizers::VERSION
@@ -12,7 +14,10 @@ Gem::Specification.new do |spec|
 
   spec.files         = Dir["*.{md,txt}", "{ext,lib,src}/**/*", "Cargo.*"]
   spec.require_path  = "lib"
-  spec.extensions    = ["ext/tokenizers/extconf.rb"]
+
+  unless BUILT_PLATFORMS.include?(RUBY_PLATFORM)
+    spec.extensions = ["ext/tokenizers/extconf.rb"]
+  end
 
   spec.required_ruby_version = ">= 2.7"
 end
