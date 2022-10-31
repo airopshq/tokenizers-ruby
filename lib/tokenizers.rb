@@ -2,7 +2,11 @@
 begin # Try loading extensions
   require_relative "tokenizers/ext/#{RUBY_PLATFORM}/ext"
 rescue LoadError
-  require "tokenizers/ext"
+  begin
+    require "tokenizers/ext"
+  rescue LoadError # Fallback to require_relative due to some weird loading issue with rspec
+    require_relative "tokenizers/ext"
+  end
 end
 
 # modules
