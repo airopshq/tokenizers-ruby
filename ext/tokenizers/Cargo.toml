@@ -1,0 +1,17 @@
+[package]
+name = "tokenizers"
+version = "0.2.0"
+authors = ["Andrew Kane <andrew@ankane.org>"]
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+magnus = "0.4"
+
+[dependencies.tokenizers]
+version = "0.13.2"
+default-features = false
+features = ["progressbar", "http", "onig", "esaxx_fast"]

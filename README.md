@@ -12,8 +12,6 @@ Add this line to your application’s Gemfile:
 gem "tokenizers"
 ```
 
-Note: Rust and pkg-config are currently required for installation, and it can take 5-10 minutes to compile the extension.
-
 ## Getting Started
 
 Load a pretrained tokenizer
@@ -61,7 +59,7 @@ To get started with development:
 git clone https://github.com/ankane/tokenizers-ruby.git
 cd tokenizers-ruby
 bundle install
-bundle exec ruby ext/tokenizers/extconf.rb && make && make install
+bundle exec rake compile
 bundle exec rake download:files
 bundle exec rake test
 ```

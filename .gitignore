@@ -11,4 +11,6 @@
 *vocab.json
 *merges.txt
 /Makefile
-.idea
+*.bundle
+*.so
+*.dll

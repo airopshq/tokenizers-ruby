@@ -5,33 +5,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v2
-      with:
-        path: |
-          ~/.cargo/registry
-          ~/.cargo/git
-          target
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.1
-        bundler-cache: true
-    - run: bundle exec ruby ext/tokenizers/extconf.rb && make && make install
-    - run: bundle exec rake download:files
-    - run: bundle exec rake test
-
-    - uses: actions/upload-artifact@v3
-      with:
-        name: my-artifact
-        path: lib/
-
-    - name: Display structure of built gems
-      run: ls -R
-      working-directory: lib/
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            tmp
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+      - run: bundle exec rake compile
+      - run: bundle exec rake download:files
+      - run: bundle exec rake test

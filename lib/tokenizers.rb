@@ -1,12 +1,8 @@
-# extlib
-begin # Try loading extensions
-  require_relative "tokenizers/ext/#{RUBY_PLATFORM}/ext"
+# ext
+begin
+  require "tokenizers/#{RUBY_VERSION.to_f}/tokenizers"
 rescue LoadError
-  begin
-    require "tokenizers/ext"
-  rescue LoadError # Fallback to require_relative due to some weird loading issue with rspec
-    require_relative "tokenizers/ext"
-  end
+  require "tokenizers/tokenizers"
 end
 
 # modules

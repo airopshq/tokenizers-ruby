@@ -1,14 +1,10 @@
-[package]
-name = "tokenizers-ruby"
-version = "0.1.0"
-authors = ["Andrew Kane <andrew@ankane.org>"]
-edition = "2018"
+[workspace]
+members = ["ext/tokenizers"]
 
-[lib]
-name = "tokenizers"
-crate-type = ["cdylib"]
+[profile.release]
+strip = true
 
-[dependencies]
-lazy_static = "1"
-rutie = "0.8.4"
-tokenizers = "0.13.1"
+[patch.crates-io]
+number_prefix = { git = "https://github.com/ankane/rust-number-prefix", branch = "license-file" }
+rb-sys-env = { git = "https://github.com/oxidize-rb/rb-sys" }
+tokenizers = { git = "https://github.com/huggingface/tokenizers" }
